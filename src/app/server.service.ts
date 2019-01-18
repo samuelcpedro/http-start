@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class ServerService {
   }
 
   getServers() {
-    return this.http.get('https://udemy-ng-http-samu.firebaseio.com/database.json')
+    // return this.http.get('https://udemy-ng-http-samu.firebaseio.com/database.json') // working
+    return this.http.get('https://udemy-ng-http-samu.firebaseio.com/database') // will give an error
       .map(
         (response: Response) => {
           const data = response.json();
@@ -26,6 +28,13 @@ export class ServerService {
             server.name = 'FETCHED_' + server.name;
           }
           return data;
+        }
+      )
+      .catch(
+        (error: Response) => {
+          // console.log(error);
+          // return Observable.throw(error);
+          return Observable.throw('Something went wrong');
         }
       );
   }
