@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ServiceService } from './service.service';
+import { ServerService } from './server.service';
 
 @Component({
   selector: 'app-root',
@@ -31,11 +31,11 @@ export class AppComponent {
     return Math.round(Math.random() * 10000);
   }
 
-  constructor(private serviceService: ServiceService) { }
+  constructor(private serverService: ServerService) { }
 
   onSave() {
     // this.serviceService.storeServers(this.servers); // still no request is getting sent
-    this.serviceService.storeServers(this.servers)
+    this.serverService.storeServers(this.servers)
       .subscribe(
         (response) => console.log(response),
         (error) => console.log(error)
@@ -43,8 +43,9 @@ export class AppComponent {
   }
 
   onGet() {
-    this.serviceService.getServers().subscribe(
-      (servers: any[]) => console.log(servers),
+    this.serverService.getServers().subscribe(
+      // (servers: any[]) => console.log(servers),
+      (servers: any[]) => this.servers = servers,
       (error) => console.log(error)
     );
   }
