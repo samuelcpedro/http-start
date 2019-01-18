@@ -20,3 +20,27 @@ export class ServiceService {
     return this.http.get('https://udemy-ng-http-samu.firebaseio.com/database.json');
   }
 }
+
+
+/**
+ * RxJS 6 without rxjs-compat
+ * Section 18, Lecture 245
+ *
+ * Don't forget - if you're using Angular (and therefore also RxJS 6+) and you're
+ * NOT using rxjs-compat  (npm install --save rxjs-compat  - you may ignore this lecture then,
+ * use the code as shown in the videos!), you have to use operators like map()  differently:
+ *
+ *
+ * Instead of
+ *    ....map(...)
+ * use
+ *    ....pipe(map(...))
+ *
+ * map also needs to be imported:
+ *
+ * Instead of
+ *    import 'rxjs/Rx';
+ * use
+ *    import { map } from 'rxjs/operators';
+ *
+ */
