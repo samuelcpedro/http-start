@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ServiceService } from './service.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,5 +29,16 @@ export class AppComponent {
   }
   private generateId() {
     return Math.round(Math.random() * 10000);
+  }
+
+  constructor(private serviceService: ServiceService) { }
+
+  onSave() {
+    // this.serviceService.storeServers(this.servers); // still no request is getting sent
+    this.serviceService.storeServers(this.servers)
+      .subscribe(
+        (response) => console.log(response),
+        (error) => console.log(error)
+      );
   }
 }
