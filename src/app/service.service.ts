@@ -10,6 +10,7 @@ export class ServiceService {
 
   storeServers(servers: any[]) {
     // this.http.post('https://udemy-ng-http-samu.firebaseio.com/', servers); // this will only create an observable
-    return this.http.post('https://udemy-ng-http-samu.firebaseio.com/database.json', servers);
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post('https://udemy-ng-http-samu.firebaseio.com/database.json', servers, { headers: headers});
   }
 }
