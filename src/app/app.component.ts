@@ -41,4 +41,18 @@ export class AppComponent {
         (error) => console.log(error)
       );
   }
+
+  onGet() {
+    this.serviceService.getServers().subscribe(
+      (response: Response) => {
+        const data = response.json();
+        /**
+         * json method will look at our body property and get the data from in there and 
+         * automatically turn it into a javascript object.
+        */
+        console.log(data);
+      },
+      (error) => console.log(error)
+    );
+  }
 }
