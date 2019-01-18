@@ -19,15 +19,15 @@ export class ServerService {
 
   getServers() {
     return this.http.get('https://udemy-ng-http-samu.firebaseio.com/database.json')
-    .map(
-      (response: Response) => {
-        const data = response.json();
-        for (const server of data) {
-          server.name = 'FETCHED_' + server.name;
+      .map(
+        (response: Response) => {
+          const data = response.json();
+          for (const server of data) {
+            server.name = 'FETCHED_' + server.name;
+          }
+          return data;
         }
-        return data;
-      }
-    );
+      );
   }
 }
 
@@ -53,4 +53,39 @@ export class ServerService {
  * use
  *    import { map } from 'rxjs/operators';
  *
+ */
+/**
+ * Catching Errors without rxjs-compat
+ * Section 18, Lecture 248
+ *
+ * Are you using Angular 6 (and therefore RxJS 6+) and you're NOT using
+ * rxjs-compat
+ *     (npm install --save rxjs-compat  - you may ignore this lecture then, use the code as shown in the videos!)?
+ *
+ * You then have to use the catch()  operator you'll see in the next lecture a bit differently.
+ *
+ * Instead of
+ *
+ *    ....catch(error => {
+ *         return Observable.throw(...)
+ *       })
+ *
+ * use
+ *
+ *    ....pipe(catchError(error => {
+ *         return throwError(...)
+ *       }))
+ *
+ * And make sure to import it:
+ *
+ * Instead of
+ *
+ *   import 'rxjs/Rx';
+ *
+ * and
+ *   import { Observable } from 'rxjs/Observable';
+ * use
+ *   import { catchError } from 'rxjs/operators';
+ * and
+ *   import { throwError } from 'rxjs';
  */
