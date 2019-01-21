@@ -38,6 +38,13 @@ export class ServerService {
         }
       );
   }
+
+  getAppName() {
+    return this.http.get('https://udemy-ng-http-samu.firebaseio.com/appName.json')
+      .map((response: Response) => { 
+        return response.json();
+      });
+  }
 }
 
 
